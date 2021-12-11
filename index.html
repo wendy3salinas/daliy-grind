@@ -1,1 +1,241 @@
-<h1>Daily Grind</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>LARGEBUCK$ Coffee</title>
+    <meta name="robots" content="noindex,nofollow" />
+	<!-- below is a google font, go to https://www.google.com/fonts to get yours! -->
+	<link href='https://fonts.googleapis.com/css?family=Holtwood+One+SC' rel='stylesheet' type='text/css'>
+	<link id="mainStylesheet" rel="stylesheet" href="css/default.css" />
+    <style type="text/css">
+	
+        html {background-color:#FF7518;/* pumpkin - overwrites default */}
+        
+        .feature {color:#FF7518; /* daily feature color - pumpkin! */}
+        
+		.masthead{
+			font-family: 'Holtwood One SC', serif; /* required for google font */
+			font-size:3em;
+		}
+	
+		#logo{
+			float:right;
+			display:inline-block;
+			padding:2px;
+			max-width:100px; /* actual size of image */
+			width:20%; /* approximate size taken on screen in maximum view */
+		}
+	
+		#coffee {
+			float:left;
+			display:inline-block;
+			padding:20px;
+			max-width:300px; /* best if actual size of image */
+			width:33%; /* approximate size taken on screen in maximum view */
+		}
+
+        h3.slogan{
+           font-style:italic; /* make the slogan italics */ 
+        }
+    </style>
+   
+    <!--[if ltIE9]>
+       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+     <![endif]-->
+</head>
+<body>
+	<header>
+	    <img src="images/largebucks-logo.jpg" alt="You drink our coffee, we make large bucks!" class="flexible" id="logo" />
+		<h1 class="masthead">LARGEBUCK$ COFFEE</h1>
+		<nav>
+			<ul>
+				<li><a href="#">Sample Link</a></li>
+                <li><a href="#">Sample Link</a></li>
+                <li><a href="#">Sample Link</a></li>
+                <li><a href="#">Sample Link</a></li>
+                <li><a href="#">Sample Link</a></li>
+			</ul>
+		</nav>
+	</header>
+    <main>
+		 <header><h3 class="slogan">You drink our coffee, we make large bucks!</h3></header>
+		<div id="coffeeTarget"></div>
+		<p>Click the links below to see the coffee specials
+			for other weekdays</p>
+		<p><a href="?day=0">Sunday</a></p>
+		<p><a href="?day=1">Monday</a></p>
+		<p><a href="?day=2">Tuesday</a></p>
+		<p><a href="?day=3">Wednesday</a></p>
+		<p><a href="?day=4">Thursday</a></p>
+		<p><a href="?day=5">Friday</a></p>
+		<p><a href="?day=6">Saturday</a></p>
+			
+		 <!--
+		 <p>
+    		 <img src="images/pumpkin-spice-latte.jpg" alt="Our Pumpkin Spice Latte tastes great on a Fall Day!" id="coffee" />
+            <strong>Monday's Coffee Special:</strong> Monday's daily coffee special is <strong>Pumpkin Spice Latte</strong>, which makes us wish it was always Fall, as this is one of our top sellers!
+		</p>
+	-->
+
+     </main>
+    <footer>
+      <small>&copy; 2014-2015, All Rights Reserved ~
+      <a href="http://validator.w3.org/check/referer" target="_blank">Valid HTML</a> ~
+      <a href="http://jigsaw.w3.org/css-validator/check?uri=referer" target="_blank">Valid CSS</a>
+      </small>
+    </footer>
+    <!-- END Footer -->
+<script>
+
+	/*
+		Use HTML/CSS & JavaScript to create a single page that rotates 
+		unique colors and content for each weekday (Sunday to Saturday) 
+		into the page.  The content must include:
+
+		One unique image, with appropriate and matching content in the alt tag.  
+
+		A paragraph or two of content that describes the daily item 
+		(paragraph must include the name of the highlighted weekday)
+
+		A unique color that supports the image and paragraph of content
+	*/
+
+	function coffeeTemplate(coffee){
+		let myReturn = "";
+
+		myReturn += `  <p>
+    		 <img src="images/${coffee.pic}" alt="${coffee.alt}" id="coffee" />
+            <strong>${coffee.weekday}'s Coffee Special:</strong> ${coffee.weekday}'s daily coffee special is <strong>${coffee.coffee}</strong>, ${coffee.description}
+		</p>`;
+
+		return myReturn;
+	}
+
+	//use location object to access querystring (address bar)
+	const queryString = window.location.search;
+		
+	//output to console    
+	console.log(queryString);
+		
+	//separate querystring parameters
+	const urlParams = new URLSearchParams(queryString);
+
+	let myDate = new Date();
+	let today = myDate.getDay();
+	let coffee = "";
+
+	if(urlParams.has("day")){
+		today = urlParams.get("day");
+		today = parseInt (today);
+	}
+
+	//Remove the following WHEN NOT TESTING
+	//today = 0;
+	
+	switch(today){
+
+		case 0:
+			today = "Sunday";
+			coffee = {
+			coffee: "Bubble Tea",
+			alt: "This is a pic of Bubble Tea",
+			description: `I love bubble tea!`,
+			pic: "bubble-tea.jpg",
+			color: "purple",
+			weekday:"Sunday"
+			}
+		
+		break;
+
+		case 1:
+			today = "Monday";
+			coffee = {
+			coffee: "Caramel Latte",
+			alt: "This is a pic of a Caramel Latte",
+			description: `I love caramel lattes! It's like dessert!`,
+			pic: "caramel-latte.jpg",
+			color: "gold",
+			weekday:"Monday"
+			}
+		
+		break;
+
+		case 2:
+			today = "Tuesday";
+			coffee = {
+			coffee: "Cold Brew",
+			alt: "This is a pic of a Cold Brew",
+			description: `I love cold brew's! It's like dessert!`,
+			pic: "cold-brew.jpg",
+			color: "light-brown",
+			weekday:"Tuesday"
+			}
+		break;
+
+		case 3:
+			today = "Wednesday";
+			coffee = {
+			coffee: "Drip Coffee",
+			alt: "This is a pic of a drip coffee",
+			description: `I love drip coffee!`,
+			pic: "drip.jpg",
+			color: "brown",
+			weekday:"Wednesday"
+			}
+		
+		break;
+
+		case 4:
+			today = "Thursday";
+			coffee = {
+			coffee: "Frappaccino",
+			alt: "This is a pic of a frappaccino",
+			description: `I love frappaccino's!`,
+			pic: "frappaccino.jpg",
+			color: "pink",
+			weekday:"Thursday"
+			}
+		
+		break;
+
+		case 5:
+			today = "Friday";
+			coffee = {
+			coffee: "Mocha",
+			alt: "This is a pic of a Mocha",
+			description: `I love Mocha's`,
+			pic: "mocha.jpg",
+			color: "orange",
+			weekday:"Friday"
+			}
+		break;
+
+		case 6:
+			today = "Saturday";
+			coffee = {
+			coffee: "Pumpkin Spice Latte",
+			alt: "This is a pic of a Pumpkin Spice Latte",
+			description: `Pumpkin Spice Lattes are our best seller`,
+			pic: "pumpkin-spice-latte.jpg",
+			color: "blue",
+			weekday:"Friday"
+			}
+		break;
+
+	}
+	
+	document.getElementById("coffeeTarget").innerHTML = coffeeTemplate(coffee);
+
+	document.querySelector("html").style.backgroundColor = coffee.color;
+
+	console.log(today);
+
+
+
+	console.log(coffee);
+
+</script>
+
+
+</body>
+</html>
